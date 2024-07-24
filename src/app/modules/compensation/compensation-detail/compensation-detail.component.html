@@ -1,35 +1,74 @@
 <ejs-treegrid
   [dataSource]="data"
-  [treeColumnIndex]="1"
   childMapping="subtasks"
-  [allowPaging]="true"
-  [pageSettings]="pageSettings"
+  [allowPaging]="false"
+  height="600px"
+  [treeColumnIndex]='1'
+
 >
   <e-columns>
+  
+    <e-column headerText='' width='60' textAlign="center" freeze='Left'>
+      <ng-template #template let-data>    
+        <img [src]="'/'+ data.PictureUrl" alt="Image" width="50" height="50">
+      </ng-template>
+    </e-column>
+
     <e-column
-      field="taskID"
-      headerText="Task ID"
-      textAlign="Right"
-      width="90"
-    ></e-column>
-    <e-column
-      field="taskName"
-      headerText="Task Name"
+      field="PersonName"
+      headerText="ชื่อพนักงาน"
       textAlign="Left"
-      width="180"
-    ></e-column>
+      width="200"
+      freeze='Left'
+    >
+    </e-column>
+
     <e-column
-      field="startDate"
-      headerText="Start Date"
-      textAlign="Right"
-      format="yMd"
-      width="90"
-    ></e-column>
-    <e-column
-      field="duration"
-      headerText="Duration"
-      textAlign="Right"
+      field="Empcode" 
+      headerText="รหัสพนักงาน"
+      textAlign="center"
       width="80"
-    ></e-column>
+    >
+    </e-column>
+    <e-column headerText='อายุ' width='120'>
+      <ng-template #template let-data>
+        {{'อายุตัว : '+ data.Age  }}<br>
+        {{'อายุในตำแหน่ง : ' + data.PositionAge}}<br>
+        {{'อายุในองค์กร : ' + data.WorkAge}}
+      </ng-template>
+    </e-column>
+
+    <e-column
+      field="EvaluatorScoreText" 
+      headerText="คะแนนประเมิน"
+      textAlign="center"
+      width="100"
+    >
+    </e-column>
+
+    <e-column headerText='newgrade' width='100' headerText="คะแนนใหม่" textAlign="center">
+      <ng-template #template let-data>
+        <ejs-dropdownlist [dataSource]="newgradeData" [fields]="fields" [value]="data.NewGradeName"></ejs-dropdownlist>
+      </ng-template>
+    </e-column>
+
+    <e-column width='100' headerText='test'>
+      <ng-template #template let-data>
+        <input class="e-input" type="text" placeholder="" value="99" disabled />
+      </ng-template>
+    </e-column>
+   
+    <e-column headerText='ชื่อตำแหน่ง/ชื่อย่อตำแหน่ง/ตำแหน่งสายงาน/ตำแหน่งบริหาร/หน่วยงาน' width='170'>
+      <ng-template #template let-data>
+        {{'ชื่อตำแหน่ง : '+ data.PositionName  }}<br>
+        {{'ชื่อย่อตำแหน่ง : '+ data.PositionShortName  }}<br>
+        {{'ตำแหน่งสายงาน : '+ data.PositionWorkLineName  }}<br>
+        {{'ตำแหน่งบริหาร : '+ data.PositionExecutiveName   }}<br>
+        {{'หน่วยงาน : '+ data.UnitCodeName  }}<br>
+      </ng-template>
+    </e-column>
+
+
+    
   </e-columns>
 </ejs-treegrid>

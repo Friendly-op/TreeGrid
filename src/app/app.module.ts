@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { CompensationDetailComponent } from './modules/compensation/compensation-detail/compensation-detail.component';
 import { CompensationModule } from './modules/compensation/compensation.module';
 
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, CompensationModule],

@@ -10,3 +10,14 @@
 @import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-grids/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-treegrid/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-inputs/styles/material.css';
+
+/* styles.css */
+.ejs-dropdownlist {
+    width: 100%;
+  }
+  /* CSS สำหรับตั้งค่าสีของเส้น frozen line ใน Syncfusion Angular Tree Grid */
+  .e-grid.e-lib .e-leftfreeze.e-freezeleftborder, 
+  .e-grid .e-leftfreeze.e-freezeleftborder {
+    border-right-color: transparent; /* เปลี่ยนสีเส้น border ที่เป็นเส้น frozen เป็นสีแดง */
+}
