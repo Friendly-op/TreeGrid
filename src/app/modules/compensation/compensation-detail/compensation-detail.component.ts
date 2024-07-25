@@ -1,10 +1,8 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
   Freeze,
-  Freeze,
   PageSettingsModel,
   SortSettingsModel,
-  TreeGrid,
   TreeGrid,
   TreeVirtual,
   VirtualScroll,
@@ -19,7 +17,7 @@ TreeGrid.Inject(Freeze)
 @Component({
   selector: 'app-compensation-detail',
   templateUrl: './compensation-detail.component.html',
-  styleUrl: './compensation-detail.component.scss'
+  styleUrl: './compensation-detail.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 
@@ -43,6 +41,6 @@ export class CompensationDetailComponent {
         { field: 'SubGradingGroupName', direction: 'Descending' },
       ],
     };
-    this.pageSettings = { pageSize: 6 };
+    this.pageSettings = { pageSize: 50 };
   }
 }

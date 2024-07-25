@@ -91,7 +91,7 @@ export const sampleData: Object[] = [
         SalaryAdjustPercent: 5.0000,
         NewSalaryAdjustRate: 0.00000,
         PMGradingGroupID: "AE2E1E6D-A14F-42A5-82BC-460D22A4A4B6",
-        RowLevel: 1,
+        RowLevel: 2,
         SubPMGradingGroupID: null,
         PMGradingDetailID: "4C22ED44-76BD-44B8-94F8-AFAFF82BD0C1",
         rowType: "Person",

@@ -17,3 +17,12 @@
 html,body{
   font-family: "Noto Sans","Noto Sans Thai", sans-serif !important;
 }
+
+
+.e-headercelldiv { 
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.e-grid .e-rowcell {
+  padding: 0 21px 0 21px !important;
+}

@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompensationDetailComponent } from './modules/compensation/compensation-detail/compensation-detail.component';
 import { CompensationModule } from './modules/compensation/compensation.module';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import {
   FreezeService,
@@ -20,7 +19,6 @@ import {
     BrowserModule,
     AppRoutingModule,
     CompensationModule,
-    NgSelectModule,
     DropDownListModule,
   ],
   providers: [VirtualScrollService, FreezeService],
