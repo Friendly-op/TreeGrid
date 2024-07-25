@@ -1,74 +1,257 @@
-<ejs-treegrid
-  [dataSource]="data"
-  childMapping="subtasks"
-  [allowPaging]="false"
-  height="600px"
-  [treeColumnIndex]='1'
-
->
-  <e-columns>
-  
-    <e-column headerText='' width='60' textAlign="center" freeze='Left'>
-      <ng-template #template let-data>    
-        <img [src]="'/'+ data.PictureUrl" alt="Image" width="50" height="50">
-      </ng-template>
-    </e-column>
-
-    <e-column
-      field="PersonName"
-      headerText="ชื่อพนักงาน"
-      textAlign="Left"
-      width="200"
-      freeze='Left'
-    >
-    </e-column>
-
-    <e-column
-      field="Empcode" 
-      headerText="รหัสพนักงาน"
-      textAlign="center"
-      width="80"
-    >
-    </e-column>
-    <e-column headerText='อายุ' width='120'>
-      <ng-template #template let-data>
-        {{'อายุตัว : '+ data.Age  }}<br>
-        {{'อายุในตำแหน่ง : ' + data.PositionAge}}<br>
-        {{'อายุในองค์กร : ' + data.WorkAge}}
-      </ng-template>
-    </e-column>
-
-    <e-column
-      field="EvaluatorScoreText" 
-      headerText="คะแนนประเมิน"
-      textAlign="center"
-      width="100"
-    >
-    </e-column>
-
-    <e-column headerText='newgrade' width='100' headerText="คะแนนใหม่" textAlign="center">
-      <ng-template #template let-data>
-        <ejs-dropdownlist [dataSource]="newgradeData" [fields]="fields" [value]="data.NewGradeName"></ejs-dropdownlist>
-      </ng-template>
-    </e-column>
-
-    <e-column width='100' headerText='test'>
-      <ng-template #template let-data>
-        <input class="e-input" type="text" placeholder="" value="99" disabled />
-      </ng-template>
-    </e-column>
-   
-    <e-column headerText='ชื่อตำแหน่ง/ชื่อย่อตำแหน่ง/ตำแหน่งสายงาน/ตำแหน่งบริหาร/หน่วยงาน' width='170'>
-      <ng-template #template let-data>
-        {{'ชื่อตำแหน่ง : '+ data.PositionName  }}<br>
-        {{'ชื่อย่อตำแหน่ง : '+ data.PositionShortName  }}<br>
-        {{'ตำแหน่งสายงาน : '+ data.PositionWorkLineName  }}<br>
-        {{'ตำแหน่งบริหาร : '+ data.PositionExecutiveName   }}<br>
-        {{'หน่วยงาน : '+ data.UnitCodeName  }}<br>
-      </ng-template>
-    </e-column>
-
-
-    
-  </e-columns>
-</ejs-treegrid>
+<div style="margin-top: 20px">
+  <ejs-treegrid
+    #gridTree
+    [dataSource]="data"
+    [treeColumnIndex]="0"
+    childMapping="subtasks"
+    [allowPaging]="false"
+    height="800px"
+    width="auto"
+    frozenColumns="1"
+    [pageSettings]="pageSettings"
+    allowTextWrap="true"
+    [textWrapSettings]="wrapSettings"
+    allowFiltering="true"
+    [filterSettings]="filterSettings"
+    enableCollapseAll="true"
+  >
+    <e-columns>
+      <e-column
+        field="PersonName"
+        headerText="ชื่อพนักงาน"
+        width="400"
+        [filter]="columnFilterSettings"
+      >
+        <ng-template #template let-data>
+          <div
+            [style.padding-left]="
+              data.ChildLevel == 1
+                ? '30px'
+                : data.ChildLevel == 2
+                ? '60px'
+                : '0px'
+            "
+            style="display: flex; flex-direction: row; margin-left: 20px"
+          >
+            <div>
+              <img [src]="'/' + data.PictureUrl" class="avatar" alt="profile" />
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <span> {{ data.PersonName }}</span>
+              <div style="flex-direction: row">
+                <span style="font-weight: bold">รหัสประจำตัว : </span
+                ><span>{{ data.Empcode }}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </e-column>
+      <e-column field="PositionLevel" headerText="ระดับพนักงาน" width="140">
+      </e-column>
+      <e-column field="Age" headerText="อายุ" textAlign="Left" width="250">
+        <ng-template #template let-data>
+          <div style="display: flex; flex-direction: column">
+            <div style="flex-direction: column">
+              <span style="font-weight: bold"> อายุตัว :</span
+              ><span>{{ data.Age }}</span>
+            </div>
+            <div style="flex-direction: column">
+              <span style="font-weight: bold">อายุในตำแหน่ง : </span
+              ><span>{{ data.EmpcWorkAgeode }} </span>
+            </div>
+            <div style="flex-direction: column">
+              <span style="font-weight: bold"> อายุในองค์กร : </span
+              ><span>{{ data.PositionAge }}</span>
+            </div>
+          </div>
+        </ng-template>
+      </e-column>
+      <e-column field="AdjustRank" headerText="การจัดอันดับ" width="120">
+        <ng-template #template let-data>
+          <input
+            class="e-input"
+            type="number"
+            style="
+              width: 50px;
+              text-align: center;
+              border: solid 1px blue;
+              border-radius: 5px;
+            "
+            [value]="data.AdjustRank"
+          />
+        </ng-template>
+      </e-column>
+      <e-column
+        field="EvaluatorScoreText"
+        headerText="คะแนนประเมิน"
+        width="120"
+      ></e-column>
+      <e-column headerText="คะแนนใหม่	" width="100">
+        <ng-template #template let-data>
+          <td>
+            <ejs-dropdownlist
+              id="ddlelement"
+              [value]="data.NewGradeName"
+              [dataSource]="datamock"
+            ></ejs-dropdownlist>
+          </td>
+        </ng-template>
+      </e-column>
+      <e-column
+        headerText="ชื่อตำแหน่ง/ชื่อย่อตำแหน่ง/ตำแหน่งสายงาน/ตำแหน่งบริหาร/หน่วยงาน"
+        width="250"
+      >
+        <ng-template #template let-data>
+          <div style="display: flex; flex-direction: column">
+            <div style="flex-direction: row">
+              <span style="font-weight: bold">ชื่อตำแหน่ง : </span
+              >{{ data.PositionName }}
+            </div>
+            <div style="flex-direction: row">
+              <span style="font-weight: bold">ชื่อย่อตำแหน่ง : </span
+              >{{ data.PositionShortName }}
+            </div>
+            <div style="flex-direction: row">
+              <span style="font-weight: bold">ตำแหน่งสายงาน : </span
+              >{{ data.PositionWorkLineName }}
+            </div>
+            <div style="flex-direction: row">
+              <span style="font-weight: bold">ตำแหน่งบริหาร : </span
+              >{{ data.PositionExecutiveName }}
+            </div>
+            <div style="flex-direction: row">
+              <span style="font-weight: bold">หน่วยงาน : </span
+              >{{ data.UnitCodeName }}
+            </div>
+          </div>
+        </ng-template></e-column
+      >
+      <e-column headerText="อัตราขึ้นเงินเดือน (%)" width="120">
+        <ng-template #template let-data>
+          <input
+            class="e-input"
+            disabled
+            type="number"
+            style="width: 50px; text-align: center"
+            [value]="data.SalaryAdjustPercent"
+          />
+        </ng-template>
+      </e-column>
+      <e-column headerText="เงินปรับประจำปี" width="120">
+        <ng-template #template let-data>
+          <input
+            class="e-input"
+            disabled
+            style="width: 50px; text-align: center"
+            [value]="data.SalaryAdjust | number"
+          />
+        </ng-template>
+      </e-column>
+      <e-column headerText="เงินปรับพิเศษ" width="120">
+        <ng-template #template let-data>
+          <input
+            class="e-input"
+            disabled
+            style="width: 50px; text-align: center"
+            [value]="data.SpecialAdjustSalary | number"
+          />
+        </ng-template>
+      </e-column>
+      <e-column
+        headerText="สรุปเงินประจำปี/กรอบเงินเดือน/รวมอัตราการขึ้นเงินเดือน(%)"
+        width="320"
+      >
+        <ng-template #template let-data>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 5px;
+              width: 100%;
+              flex-wrap: wrap;
+            "
+          >
+            <div style="display: flex; gap: 5px; width: 100%">
+              <span style="flex: 1; min-width: 0; text-align: Left"
+                >เงินเดือนปัจจุบัน :</span
+              >
+              <span style="flex: 1; min-width: 0; text-align: Left">{{
+                data.BaseSalary | number
+              }}</span>
+              <span
+                *ngIf="!!data.Status"
+                [class]="
+                  data.Status == 'Under' ||
+                  data.Status == 'Over' ||
+                  data.Status == 'Over Max'
+                    ? ' e-badge e-badge-danger'
+                    : ' e-badge e-badge-success'
+                "
+                style="
+                  flex: 1;
+                  min-width: 0;
+                  text-align: center;
+                  font-size: 12px;
+                "
+                >{{ data.Status }}</span
+              >
+              <span
+                *ngIf="!!data.Status == false"
+                style="
+                  flex: 1;
+                  min-width: 0;
+                  text-align: center;
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div style="display: flex; gap: 5px; width: 100%">
+              <span style="flex: 1; min-width: 0; text-align: Left"
+                >เงินเดือนที่ปรับ :</span
+              >
+              <span style="flex: 1; min-width: 0; text-align: Left">{{
+                data.TotalSalaryAdjust | number
+              }}</span>
+              <span style="flex: 1; min-width: 0; text-align: Left">{{
+                data.SalaryAdjustPercent | number
+              }}</span>
+            </div>
+            <div style="display: flex; gap: 5px; width: 100%">
+              <span style="flex: 1; min-width: 0; text-align: Left"
+                >เงินเดือนใหม่ :</span
+              >
+              <span style="flex: 1; min-width: 0; text-align: Left">{{
+                data.NewSalary | number
+              }}</span>
+              <span
+                *ngIf="!!data.SalaryQuartile"
+                [class]="
+                  data.SalaryQuartile == 'Under' ||
+                  data.SalaryQuartile == 'Over' ||
+                  data.SalaryQuartile == 'Over Max'
+                    ? ' e-badge e-badge-danger'
+                    : ' e-badge e-badge-success'
+                "
+                style="
+                  flex: 1;
+                  min-width: 0;
+                  text-align: center;
+                  font-size: 12px;
+                "
+                >{{ data.SalaryQuartile }}</span
+              >
+              <span
+                *ngIf="!!data.SalaryQuartile == false"
+                style="
+                  flex: 1;
+                  min-width: 0;
+                  text-align: center;
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+          </div> </ng-template
+      ></e-column>
+    </e-columns>
+  </ejs-treegrid>
+</div>

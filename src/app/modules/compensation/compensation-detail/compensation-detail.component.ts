@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
+  Freeze,
   Freeze,
   PageSettingsModel,
   SortSettingsModel,
   TreeGrid,
+  TreeGrid,
+  TreeVirtual,
+  VirtualScroll,
 } from '@syncfusion/ej2-angular-treegrid';
-import { data } from '../models/data';
+// import { data } from '../models/data';
 import { sampleData } from '../models/dataGridText';
+import { allData } from '../models/allData';
+TreeGrid.Inject(Freeze);
 
 
 TreeGrid.Inject(Freeze)
@@ -14,16 +20,23 @@ TreeGrid.Inject(Freeze)
   selector: 'app-compensation-detail',
   templateUrl: './compensation-detail.component.html',
   styleUrl: './compensation-detail.component.scss'
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class CompensationDetailComponent {
+  @ViewChild('gridTree', { static: true })
+  public gridtree: any;
   public data?: Object[];
+  public filterSettings = { type: 'Excel' };
   public sortSettings?: SortSettingsModel;
   public pageSettings?: PageSettingsModel;
   public contextMenuItems?: Object[];
-
+  public datamock: string[] = ['A+', 'A', 'B', 'C', 'D'];
+  public wrapSettings: any = { wrapMode: 'Header' };
+  public columnFilterSettings?: Object;
+  public template?: string;
   ngOnInit(): void {
-    this.data = sampleData;
+    this.data = allData;
     this.sortSettings = {
       columns: [
         { field: 'GradingGroupName', direction: 'Ascending' },
@@ -32,28 +45,4 @@ export class CompensationDetailComponent {
     };
     this.pageSettings = { pageSize: 6 };
   }
-
-  public PersonPicture: any = [
-    { id: 1, name: 'John', imagePath: 'assets/image/mail1.png' },
-    { id: 2, name: 'Smith', imagePath: 'assets/image/mail2.png' }
-  ];
-
-  public datagrade: any = [
-    { id: 1,  newgrade: 'A+' },
-    { id: 2,  newgrade: 'A' },
-    { id: 2,  newgrade: 'B' },
-    { id: 2,  newgrade: 'C' },
-    { id: 2,  newgrade: 'D' },
-    
-  ];
-
-  public newgradeData: Object[] = [
-    { newgrade: 'A+' },
-    { newgrade: 'A' },
-    { newgrade: 'B' },
-    { newgrade: 'C' },
-    { newgrade: 'D' }
-  ];
-
-  public fields: Object = { text: 'newgrade', value: 'newgrade' };
 }

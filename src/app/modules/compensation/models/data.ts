@@ -1,4 +1,4 @@
-export let data: Object[] = [
+export const data: Object[] = [
   {
     RowNum: 1,
     RowLevel: 1,

@@ -1,1 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap');
+::ng-deep .e-gridcontent .e-rowcell{
+  background-color: black !important;
+}
+::ng-deep .e-treegrid .e-rowcell {
+  border-bottom: 1px solid black !important;
+}
 
+::ng-deep .e-treegrid .e-row {
+  border-bottom: 1px solid black !important;
+}
+
+::ng-deep .e-treegrid .e-headercell {
+  border-bottom: 1px solid black !important;
+}
+
+::ng-deep .e-treegrid .e-row td {
+  border-bottom: 1px solid black !important;
+}
+.details {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+}
+td {
+  padding: 2px 2px 3px 4px;
+}
+
+
+body,html {
+  font-family: "Noto Sans","Noto Sans Thai", sans-serif;
+}
+.e-grid{
+  font-family: "Noto Sans","Noto Sans Thai", sans-serif !important;
+
+}
+.e-headertext{
+  font-size: 13px !important;
+}
+.e-grid .e-row .e-input-group .e-input.e-field {  //for edit state
+
+}
+.avatar{
+  margin-top: 20%;
+  margin-left:40px ;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.newSpan {
+  width: 25px;      //add the required width for child rows
+}
+.e-grid.e-lib .e-leftfreeze.e-freezeleftborder,
+.e-grid .e-leftfreeze.e-freezeleftborder {
+  border-right-color: transparent; /* เปลี่ยนสีเส้น border ที่เป็นเส้น frozen เป็นสีแดง */
+}
+
+.span{
+  font-size: 15px !important;
+}

@@ -15,7 +15,7 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 
 @NgModule({
   declarations: [CompensationDetailComponent],
-  imports: [CommonModule, BrowserModule, TreeGridModule,DropDownListModule,NumericTextBoxModule,FormsModule],
+  imports: [CommonModule, BrowserModule, TreeGridModule, DropDownListModule],
   providers: [PageService, SortService, FilterService],
 })
 export class CompensationModule {}
